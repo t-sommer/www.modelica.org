@@ -133,6 +133,12 @@ menu:
       name: "Libraries"
       url: "/libraries/"
       weight: 1
+  
+    - pageRef: "libraries2"
+      identifier: "libraries2"
+      name: "Libraries2"
+      url: "/libraries2/"
+      weight: 1
 
     - pageRef: "tools"
       identifier: "tools"

@@ -1,3 +1,6 @@
+---
+---
+
 # Modelica Tools
 
 ## Introduction  
@@ -11,6 +14,61 @@ In order that the Modelica modeling language can be used to solve actual problem
 The following commercial and free modeling and simulation environments for Modelica are currently available (note, that demo versions for the commercial environments are available and that some demo versions can be downloaded free of charge):
 
 ## Commercial Modelica Simulation Environments
+
+{{<rawhtml>}}
+<div class="row justify-content-center mt-4">
+    <div class="col-sm-4 col-lg-3 text-end">
+    <img src="/images/logos/Altair.png" style="margin-top: 7px; max-height: 46px; max-width: 140px;"/>
+    </div>
+    <div class="col-sm-8 col-lg-9">
+    <div><a href="#" style="font-size: 20px; font-weight: 500;">solidThinking Activate</a></div>
+    <div>
+        <small>by <a href="#">Altair</a></small>            
+    </div>
+    <p class="mt-1">solidThinking Activate is a multi-disciplinary system modeling and simulation solution. Its intuitive block diagram environment combined with a modern user interface allows to rapidly build diagrams. Activate comes with a comprehensive library of blocks along with a powerful hybrid simulator that can not only handle continuous and discrete-time models but also allows to mix both signal-based as well as physical components (Modelica) in the same model. It’s also compliant with Functional Mock-up Interface (FMI) for both import and export – in model exchange as well as co-simulation modes. The Modelica support in solidThinking Activate is powered by Maplesoft™ and includes the Maplesoft™ Modelica engine and Modelica Standard Library for the modeling of physical components.</p>
+    </div>
+</div>
+
+<div class="row justify-content-center mt-4">
+    <div class="col-sm-4 col-lg-3 text-end">
+    <img src="/images/logos/Ansys.svg" style="margin-top: 7px; max-height: 46px; max-width: 140px;"/>
+    </div>
+    <div class="col-sm-8 col-lg-9">
+    <div><a href="#" style="font-size: 20px; font-weight: 500;">Simplorer</a></div>
+    <div>
+        <small>by <a href="#">Ansys</a></small>            
+    </div>
+    <p class="mt-1">Simplorer is a powerful platform for simulating and analyzing physics-based models of complex systems. With flexible modeling capabilities and tight integrations with ANSYS solutions for 3-D physics simulation and embedded software design, Simplorer provides broad support for assembling system-level physical models and robust simulation for verifying and optimizing system performance. Simplorer supports multiple standard modeling languages and exchange formats, including Modelica, VHDL-AMS, and the Functional Mock-up Interface, and is compatible with Modelica libraries offered by Modelon.</p>
+    </div>
+</div>
+
+<div class="row justify-content-center mt-4">
+    <div class="col-sm-4 col-lg-3 text-end">
+    <img src="/images/logos/3DS.svg" style="margin-top: 7px; max-height: 46px; max-width: 140px;"/>
+    </div>
+    <div class="col-sm-8 col-lg-9">
+    <div><a href="#" style="font-size: 20px; font-weight: 500;">Dymola</a></div>
+    <div>
+        <small>by <a href="#">Dassault Systemes</a></small>            
+    </div>
+    <p class="mt-1">Dymola has a Modelica translator which is able to perform all necessary symbolic transformations for large systems (> 100 000 equations) as well as for real time applications. A graphical editor for model editing and browsing, as well as a simulation environment are included. Convenient interfaces to MATLAB and the popular block diagram simulator Simulink exist. For example, a Modelica model can be transformed into a SIMULINK S-function C mex-file which can be simulated in SIMULINK as an input/output block. A demo version of Dymola can be downloaded here.</p>
+    </div>
+</div>
+
+<div class="row justify-content-center mt-4">
+    <div class="col-sm-4 col-lg-3 text-end">
+    <img src="/images/logos/Modelon.svg" style="margin-top: 7px; max-height: 46px; max-width: 140px;"/>
+    </div>
+    <div class="col-sm-8 col-lg-9">
+    <div><a href="#" style="font-size: 20px; font-weight: 500;">Impact</a></div>
+    <div>
+        <small>by <a href="#">Modelon</a></small>            
+    </div>
+    <p class="mt-1">Modelon Impact is a next generation system modeling and simulation platform, leveraging the benefits of web and open standard technologies. With openness at its core, Modelon Impact supports standards such as Modelica, FMI, Python and REST. The user-friendly browser interface provides modeling experts the tools they need to create, simulate, and experiment. Steady-state or dynamic solutions can be executed from the same model, reducing effort to get an answer. Finally, the Modelon Impact API enables user-specific workflows through Python-based custom functions, and deployment of models to non-experts via targeted web applications or Jupyter Notebooks.</p>
+    </div>
+</div>
+
+{{</rawhtml>}}
 
 (in alphabetical order)
 

@@ -1,0 +1,137 @@
+---
+title: Tools
+---
+
+<div id="app">
+
+  <div class="row justify-content-center">
+
+    <div class="col-auto">
+        <div class="row">
+          <label for="fmi-version-button-group" class="form-label text-center">Works with</label>
+        </div>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Tools
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Altair Activate</a></li>
+                <li><a class="dropdown-item" href="#">ANSYS Simplorer</a></li>
+                <li><a class="dropdown-item" href="#">3DS Dymola</a></li>
+                <li><a class="dropdown-item" href="#">ESI SimulationX</a></li>
+                <li><a class="dropdown-item" href="#">OpenModelica</a></li>
+                <li><a class="dropdown-item" href="#">Maplesoft MapleSim</a></li>
+                <li><a class="dropdown-item" href="#">Modelon Impact</a></li>
+                <li><a class="dropdown-item" href="#">Siemens Simcenter Amesim</a></li>
+                <li><a class="dropdown-item" href="#">Suzhou Tongyuan MWorks</a></li>
+                <li><a class="dropdown-item" href="#">Wolfram SystemModeler</a></li>
+            </ul>
+        </div>
+      </div>
+
+
+    <div class="col-auto">
+        <div class="row">
+          <label for="fmi-version-button-group" class="form-label text-center">Domain</label>
+        </div>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Domain
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Vehicle</a></li>
+                <li><a class="dropdown-item" href="#">Energy</a></li>
+                <li><a class="dropdown-item" href="#">Chemical</a></li>
+                <li><a class="dropdown-item" href="#">Fluid</a></li>
+                <li><a class="dropdown-item" href="#">Thermal</a></li>
+                <li><a class="dropdown-item" href="#">Multibody</a></li>
+            </ul>
+        </div>
+      </div>
+
+    <div class="col-auto">
+        <div class="row">
+          <label for="fmi-version-button-group" class="form-label text-center">License</label>
+        </div>
+        <div class="btn-group ml-3" role="group">
+          <button type="button" class="btn btn-secondary active"><i class="fas fa-dollar-sign"></i></button>
+          <button type="button" class="btn btn-secondary active"><i class="fab fa-osi"></i></button>
+        </div>
+      </div>
+
+    <div class="col-auto">
+      <div class="row">
+        <label for="fmi-version-button-group" class="form-label text-center">Search</label>
+      </div>
+      <input v-model="search" type="text" class="form-control" placeholder="Type to search">
+    </div>
+  </div>
+  
+  <div class="container row justify-content-end mt-3">
+    <div class="col-auto">
+      <small><a href="https://github.com/modelica/fmi-standard.org/blob/master/CONTRIBUTING.md#updating-the-tools-list">How do I add or update my tool?</a></small>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-3">
+        <img src="/images/logos/Modelon.svg" style="margin-top: 7px; max-height: 46px; max-width: 140px;"/>
+    </div>
+    <div class="col-9">
+        <a href="#" style="font-size: 20px; font-weight: 500;">Air Conditioning Library</a>
+        <p>Commercial library for air conditioning systems. <a href="#"><i class="fa-solid fa-cart-shopping"></i></a></p>
+        <p></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-3">
+        <img src="/images/logos/3DS.svg" style="margin-top: 7px; max-height: 46px; max-width: 140px;"/>
+    </div>
+    <div class="col-9">
+        <a href="#" style="font-size: 20px; font-weight: 500;">Electrified Powertrains Library</a>
+        <p>Commercial library for design and application of electric drive systems.</p>
+        <p>-> Dassault Systemes</p>
+    </div>
+  </div>
+
+  <div class="container mt-5">
+
+    <div v-for="tool in filteredTools" class="row justify-content-center mt-4">
+      <div class="col-sm-4 col-lg-3 text-end">
+        <img v-if="tool.hasOwnProperty('logo')" :src="imageURL(tool.logo)" style="margin-top: 7px; max-height: 46px; max-width: 140px;"/>
+      </div>
+      <div class="col-sm-8 col-lg-6">
+        <div><a :href="tool.url" style="font-size: 20px; font-weight: 500;">{{ tool.name }}</a></div>
+        <div>
+          <small>by <a :href="tool.vendorURL">{{ tool.vendor }}</a><span v-if="tool.hasOwnProperty('version')"> | Ver {{ tool.version }}</span></small>            
+        </div>
+        <div>
+          <small>
+            <span v-if="hasFeature(tool.fmiVersions, '1.0')" class="badge bg-secondary me-1">1.0</span>
+            <span v-if="hasFeature(tool.fmiVersions, '2.0')" class="badge bg-secondary me-1">2.0</span>
+            <span v-if="hasFeature(tool.fmiVersions, '3.0')" class="badge bg-secondary me-1">3.0</span>
+            <span v-if="hasFeature(tool.fmuImport, 'CS')" class="badge bg-secondary me-1"><i class="fas fa-sign-in-alt"></i> CS</span>
+            <span v-if="hasFeature(tool.fmuImport, 'ME')" class="badge bg-secondary me-1"><i class="fas fa-sign-in-alt"></i> ME</span>
+            <span v-if="hasFeature(tool.fmuImport, 'SE')" class="badge bg-secondary me-1"><i class="fas fa-sign-in-alt"></i> SE</span>
+            <span v-if="hasFeature(tool.fmuExport, 'CS')" class="badge bg-secondary me-1"><i class="fas fa-sign-out-alt"></i> CS</span>
+            <span v-if="hasFeature(tool.fmuExport, 'ME')" class="badge bg-secondary me-1"><i class="fas fa-sign-out-alt"></i> ME</span>
+            <span v-if="hasFeature(tool.fmuExport, 'SE')" class="badge bg-secondary me-1"><i class="fas fa-sign-out-alt"></i> SE</span>
+            <span v-if="hasFeature(tool.platforms, 'Linux')" class="badge bg-secondary me-1"><i class="fab fa-linux"></i></span>
+            <span v-if="hasFeature(tool.platforms, 'Windows')" class="badge bg-secondary me-1"><i class="fab fa-windows"></i></span>
+            <span v-if="hasFeature(tool.platforms, 'macOS')" class="badge bg-secondary me-1"><i class="fab fa-apple"></i></span>
+            <span v-if="hasFeature(tool.platforms, 'Source Code')" class="badge bg-secondary me-1"><i class="fa-solid fa-c"></i></span>
+            <span v-if="tool.license == 'commercial'" class="badge bg-secondary me-1"><i class="fas fa-dollar-sign"></i></span>
+            <span v-if="tool.license == 'osi'" class="badge bg-secondary me-1"><i class="fab fa-osi"></i></span>
+            <span v-if="hasFeature(tool.interfaces, 'GUI')" class="badge bg-secondary me-1"><i class="fa-solid fa-window-maximize"></i></span>
+            <span v-if="hasFeature(tool.interfaces, 'CLI')" class="badge bg-secondary me-1"><i class="fa-solid fa-terminal"></i></span>
+            <span v-if="hasFeature(tool.interfaces, 'library')" class="badge bg-secondary me-1"><i class="fa-solid fa-file-code"></i></span>
+          </small>
+        </div>
+        <div class="mt-1"><small><a v-if="tool.hasOwnProperty('examplesURL')" :href="tool.examplesURL"><i style="color: #ffe62c" class="fa-solid fa-star me-1"></i>Examples & Compatibility</a></small></div>
+        <p class="mt-1">{{ tool.description }}</p>
+      </div>
+    </div>
+  </div>
+
+</div>
