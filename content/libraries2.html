@@ -73,28 +73,6 @@ title: Tools
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-3">
-        <img src="/images/logos/Modelon.svg" style="margin-top: 7px; max-height: 46px; max-width: 140px;"/>
-    </div>
-    <div class="col-9">
-        <a href="#" style="font-size: 20px; font-weight: 500;">Air Conditioning Library</a>
-        <p>Commercial library for air conditioning systems. <a href="#"><i class="fa-solid fa-cart-shopping"></i></a></p>
-        <p></p>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-3">
-        <img src="/images/logos/3DS.svg" style="margin-top: 7px; max-height: 46px; max-width: 140px;"/>
-    </div>
-    <div class="col-9">
-        <a href="#" style="font-size: 20px; font-weight: 500;">Electrified Powertrains Library</a>
-        <p>Commercial library for design and application of electric drive systems.</p>
-        <p>-> Dassault Systemes</p>
-    </div>
-  </div>
-
   <div class="container mt-5">
 
     <div v-for="tool in filteredTools" class="row justify-content-center mt-4">
@@ -135,3 +113,124 @@ title: Tools
   </div>
 
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script>
+
+  const { createApp } = Vue
+
+  function containsLowerCase(a, b) {
+    if (a == undefined) return false;
+    return a.toLowerCase().indexOf(b.toLowerCase()) > -1;
+  }
+
+  function listContains(l, a) {
+    if (l == undefined) return false;
+    return l.includes(a);
+  }
+
+  createApp({
+    data() {
+      return {
+        showFMI1: false,
+        showFMI2: false,
+        showFMI3: false,
+        showCSImport: false,
+        showMEImport: false,
+        showSEImport: false,
+        showCSExport: false,
+        showMEExport: false,
+        showSEExport: false,
+        showWindows: false,
+        showLinux: false,
+        showMac: false,
+        showSourceCode: false,
+        showCommercial: false,
+        showOpenSource: false,
+        showGUI: false,
+        showCLI: false,
+        showLibrary: false,
+        search: "",
+        tools: []
+      }
+    },
+    created() {
+      axios.get('/libraries.json')
+        .then(response => {
+          this.tools = response.data.sort(function (a, b) {
+            if (a.hasOwnProperty('examplesURL') == b.hasOwnProperty('examplesURL')) {
+              return a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1;               
+            } else {
+              return a.hasOwnProperty('examplesURL') ? -1 : 1;               
+            }
+          })
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+    methods: {
+      imageURL: function (filename) {
+        return "/images/logos/" + filename;
+      },
+      hasFeature: function (features, feature) {
+        try {
+          return features.indexOf(feature) >= 0;
+        } catch (error) {
+          // console.error(error);
+        }
+      },
+      toggleShowCommercial: function () {
+        if (!this.showCommercial) this.showOpenSource = false;
+        this.showCommercial = !this.showCommercial;
+      },
+      toggleShowOpenSource: function () {
+        if (!this.showOpenSource) this.showCommercial = false;
+        this.showOpenSource = !this.showOpenSource;
+      }
+    },
+    computed: {
+      filteredTools() {
+
+        self = this;
+
+        return this.tools.filter(tool => {
+
+          if (self.showFMI1 && !listContains(tool.fmiVersions, '1.0')) return false;
+          if (self.showFMI2 && !listContains(tool.fmiVersions, '2.0')) return false;
+          if (self.showFMI3 && !listContains(tool.fmiVersions, '3.0')) return false;
+
+          if (self.showCSImport && !listContains(tool.fmuImport, 'CS')) return false;
+          if (self.showMEImport && !listContains(tool.fmuImport, 'ME')) return false;
+          if (self.showSEImport && !listContains(tool.fmuImport, 'SE')) return false;
+
+          if (self.showCSExport && !listContains(tool.fmuExport, 'CS')) return false;
+          if (self.showMEExport && !listContains(tool.fmuExport, 'ME')) return false;
+          if (self.showSEExport && !listContains(tool.fmuExport, 'SE')) return false;
+
+          if (self.showWindows    && !listContains(tool.platforms,'Windows'))     return false;
+          if (self.showLinux      && !listContains(tool.platforms,'Linux'))       return false;
+          if (self.showMac        && !listContains(tool.platforms,'macOS'))       return false;
+          if (self.showSourceCode && !listContains(tool.platforms,'Source Code')) return false;
+
+          if (self.showCommercial && tool.license != 'commercial') return false;
+          if (self.showOpenSource && tool.license != 'osi')        return false;
+
+          if (self.showGUI     && !listContains(tool.interfaces, 'GUI'))     return false;
+          if (self.showCLI     && !listContains(tool.interfaces, 'CLI'))     return false;
+          if (self.showLibrary && !listContains(tool.interfaces, 'library')) return false;
+
+          return containsLowerCase(tool.name, this.search) || containsLowerCase(tool.vendor, this.search) || containsLowerCase(tool.description, this.search);
+        })
+      }
+    }
+  }).mount('#app')
+</script>
+
+<script>
+var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+  return new bootstrap.Popover(popoverTriggerEl)
+})
+</script>

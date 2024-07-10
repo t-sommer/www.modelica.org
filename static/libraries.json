@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Air Conditioning Library",
+        "license": "commercial",
+        "logo": "Modelon.svg",
+        "url": "http://www.modelon.com/products/modelon-library-suite/air-conditioning-library/",
+        "vendor": "Modelon",
+        "vendorURL": "https://modelon.com/",
+        "description": "Commercial library for air conditioning systems.",
+        "worksWith": ["Dymola", "Impact"]
+    },
+    {
+        "name": "Electrified Powertrains Library",
+        "license": "commercial",
+        "logo": "3DS.svg",
+        "url": "https://3ds.com/",
+        "vendor": "Dassault Systèmes",
+        "vendorURL": "https://3ds.com/",
+        "description": "Commercial library for design and application of electric drive systems.",
+        "worksWith": ["Dymola"]
+    }
+]
